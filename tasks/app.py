@@ -13,12 +13,15 @@ class Person(db.Model):
     id =db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(), nullable=False)
 
-db.create_all()
+    
+    
+ with app.app_context():
+    Person = Person.query.first()
+    db.create_all()
 
 @app.route('/')
 def index():
-    with app.app_context():
-        return "Hello i am back"
+    return "Hello " + Person.name
 
 
 
